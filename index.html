@@ -9,18 +9,85 @@
     content="width=device-width, initial-scale=1.0"
   />
 
+  <!-- Referrer policy -->
   <meta
     name="referrer"
     content="strict-origin-when-cross-origin"
   />
 
-  <title>Monikanchan</title>
+  <!-- SEO -->
+  <title>Monikanchan | মণিকাঞ্চন</title>
+
+  <meta
+    name="description"
+    content="Monikanchan (মণিকাঞ্চন) — an Assamese cultural and Naam community website showcasing traditions, music, performances, gallery and cultural heritage."
+  />
+
+  <meta
+    name="robots"
+    content="index, follow"
+  />
+
+  <!-- Canonical URL -->
+  <!-- Replace this with your real Vercel/custom domain -->
+  <link
+    rel="canonical"
+    href="https://monikanchan.vercel.app/"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/assets/favicon.svg"
+  />
+
+  <!-- Open Graph / Social sharing -->
+  <meta
+    property="og:title"
+    content="Monikanchan | মণিকাঞ্চন"
+  />
+
+  <meta
+    property="og:description"
+    content="Assamese cultural and Naam community website showcasing traditions, music, performances, gallery and cultural heritage."
+  />
+
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <meta
+    property="og:url"
+    content="https://monikanchan.vercel.app/"
+  />
+
+  <meta
+    property="og:image"
+    content="https://monikanchan.vercel.app/assets/gallery%20photo.png"
+  />
+
+  <!-- Organization structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Monikanchan",
+    "alternateName": "মণিকাঞ্চন",
+    "url": "https://monikanchan.vercel.app/",
+    "logo": "https://monikanchan.vercel.app/assets/favicon.svg"
+  }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
 
-  <script type="module" src="/src/main.jsx"></script>
+  <script
+    type="module"
+    src="/src/main.jsx"
+  ></script>
 </body>
 
 </html>
