@@ -33,7 +33,17 @@ const Gallery = () => {
     "/assets/gallery/19.jpeg",
     "/assets/gallery/20.jpeg",
     "/assets/gallery/21.jpeg",
-        "/assets/gallery/22.jpeg",
+    "/assets/gallery/22.jpeg",
+      "/assets/gallery/23.jpeg",
+      "/assets/gallery/24.jpeg",
+      "/assets/gallery/25.jpeg",
+      "/assets/gallery/26.jpeg",
+      "/assets/gallery/27.jpeg",
+      "/assets/gallery/28.jpeg",
+      "/assets/gallery/29.jpeg",
+      "/assets/gallery/30.jpeg",
+      "/assets/gallery/31.jpeg",
+      "/assets/gallery/32.jpeg",
 
     
   ];
@@ -65,11 +75,11 @@ const Gallery = () => {
       title: "Bir Naam",
       description: "Traditional devotional Bir Naam.",
     },
-    // {
-    //   id: "YOUR_VIDEO_ID_4",
-    //   title: "Coming Soon !",
-    //   description: "",
-    // },
+    {
+      id: "J626anWT2dE",
+      title: "Bir Naam",
+      description: "Traditional devotional Bir Naam.",
+    },
     // {
     //   id: "YOUR_VIDEO_ID_5",
     //   title: "Coming Soon !",
@@ -292,7 +302,7 @@ const Gallery = () => {
               </p>
 
               <h1 className="mt-3 font-serif text-4xl font-bold leading-tight text-[#8B1515] sm:text-5xl md:text-6xl lg:text-7xl">
-                Gallery
+                Photo Gallery
               </h1>
 
               <div className="mx-auto mt-5 h-px w-20 bg-[#a91616] sm:w-28" />

@@ -122,7 +122,7 @@ const ZubeenTribute = () => {
         overflow-hidden
         px-[5vw]
         pb-[8vh]
-        pt-[5vh]
+        pt-[1vh]
         sm:mt-[12vh]
         sm:pt-[6vh]
         lg:px-[6vw]
@@ -437,7 +437,7 @@ const ZubeenTribute = () => {
             mx-auto
             flex
             w-full
-            max-w-md
+            max-w-sm
             justify-center
           "
         >
@@ -573,7 +573,7 @@ const ZubeenTribute = () => {
                 <img
                   src="/assets/zubeen da.jpg"
                   alt="Tribute music artwork"
-                  className="block h-auto w-full"
+                  className="block h-72 w-full"
                   draggable="false"
                 />
               </motion.div>

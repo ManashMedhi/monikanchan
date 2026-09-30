@@ -34,7 +34,7 @@ const Team = () => {
     },
     {
       name: "Jayanta Das / জয়ন্ত দাস",
-      image: "/assets/team/nagara-1.png",
+      image: "/assets/team/jd1.jpeg",
     },
     {
       name: " Biplob Das/বিপ্লৱ দাস",
@@ -104,15 +104,18 @@ const Team = () => {
       image: "/assets/team/bhargab.webp",
     },
     {
-      name: "Joydeep Das / জয়দীপ দাস",
+      name: "Joydeep Das / জয়দ্ধীপ দাস",
       image: "/assets/team/joydeep.webp",
     },
   ];
-  
   const Pali = [
     {
       name: "Niranjan Das / নিৰঞ্জন দাস",
       image: "/assets/team/niru jetha.webp",
+    },
+    {
+      name: "Barun Das / বৰুণ দাস",
+      image: "/assets/team/bd.webp",
     },
     {
       name: "Pradip Das/ প্ৰদীপ দাস",
@@ -123,7 +126,7 @@ const Team = () => {
       image: "/assets/team/bhargab.webp",
     },
     {
-      name: "Joydeep Das / জয়দীপ দাস",
+      name: "Joydeep Das / জয়দ্ধীপ দাস",
       image: "/assets/team/joydeep.webp",
     },
     {
@@ -155,7 +158,15 @@ const Team = () => {
   image: "/assets/team/Bishal.webp",
 },
 {
-  name: "Dhurup Jyoti Kalita / ধুৰূপ জ্যোতি কলিতা",
+  name: "Kaushik Das/ কৌশিক দাস ",
+  image: "/assets/team/kd.jpeg",
+},
+{
+  name: "Dilip Das/ দিলীপ দাস ",
+  image: "/assets/team/dilip.jpeg",
+},
+{
+  name: "Dhruba Jyoti Kalita / ধ্ৰুৱজ্যোতি কলিতা",
   image: "/assets/team/dhurup.webp",
 },
 {

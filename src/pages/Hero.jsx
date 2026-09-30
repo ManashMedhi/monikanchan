@@ -547,7 +547,7 @@ const Hero = () => {
           z-10
 
           mx-auto
-          mt-[20vh]
+          mt-[1vh]
 
           grid
           w-full
@@ -615,7 +615,6 @@ const Hero = () => {
                 absolute
                 -inset-3
                 rounded-3xl
-                bg-[#8B1515]/10
                 blur-xl
               "
             />
@@ -635,7 +634,7 @@ const Hero = () => {
               className="
                 relative
 
-                mt-50
+                mt-37
 
                 w-[70vw]
 
