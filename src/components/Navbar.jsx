@@ -308,33 +308,6 @@ const Navbar = () => {
             }
           `}
         >
-          {/* Decorative Pattern */}
-          <img
-            src="/patterns/pattern-1.svg"
-            alt=""
-            className="
-              pointer-events-none
-              absolute
-              bottom-0
-              left-0
-              w-48
-              opacity-10
-            "
-          />
-
-          <img
-            src="/patterns/pattern-2.svg"
-            alt=""
-            className="
-              pointer-events-none
-              absolute
-              right-0
-              top-24
-              w-40
-              opacity-10
-            "
-          />
-
           {/* Mobile Links */}
           <div className="relative flex flex-col items-center gap-7">
 

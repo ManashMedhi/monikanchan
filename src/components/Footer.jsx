@@ -474,7 +474,7 @@ const Footer = () => {
 
               {/* Phone */}
               <a
-                href="tel:+919999999999"
+                href="tel:96784 39591"
                 className="
                   flex
                   items-center
