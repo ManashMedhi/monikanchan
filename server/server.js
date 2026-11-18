@@ -16,6 +16,30 @@ import adminAuthRoutes from "./routes/adminAuth.routes.js";
 import galleryRoutes from "./routes/gallery.routes.js";
 
 // Validate environment before starting.
+// function validateEnvironment() {
+//   const required = [
+//     "MONGODB_URI",
+//     "JWT_SECRET",
+//     "FRONTEND_ORIGINS",
+//     "AWS_REGION",
+//     "AWS_S3_BUCKET",
+//     "CLOUDFRONT_DOMAIN",
+//   ];
+
+//   for (const name of required) {
+//     if (!process.env[name]) {
+//       throw new Error(`${name} is required.`);
+//     }
+//   }
+
+//   if (process.env.JWT_SECRET.length < 32) {
+//     throw new Error("JWT_SECRET must contain at least 32 characters.");
+//   }
+// }
+
+
+
+
 function validateEnvironment() {
   const required = [
     "MONGODB_URI",
@@ -23,7 +47,6 @@ function validateEnvironment() {
     "FRONTEND_ORIGINS",
     "AWS_REGION",
     "AWS_S3_BUCKET",
-    "CLOUDFRONT_DOMAIN",
   ];
 
   for (const name of required) {
