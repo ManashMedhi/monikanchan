@@ -94,6 +94,85 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
+  // Content uploaded by admins and stored in MongoDB / private S3.
+  const [uploadedPhotos, setUploadedPhotos] = useState([]);
+  const [uploadedVideos, setUploadedVideos] = useState([]);
+  const [galleryError, setGalleryError] = useState("");
+
+  // Fetch gallery content from the backend. Presigned S3 URLs expire,
+  // so refresh the response periodically to obtain fresh URLs.
+  
+useEffect(() => {
+  const apiUrl = (
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
+  ).replace(/\/$/, "");
+
+  const controller = new AbortController();
+
+  const fetchGallery = async () => {
+    try {
+      const response = await fetch(
+        `${apiUrl}/api/gallery?page=1&limit=100`,
+        { signal: controller.signal }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Gallery request failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const items = Array.isArray(data.items) ? data.items : [];
+
+      setUploadedPhotos(
+        items.filter(
+          (item) => item.type === "photo" && item.url
+        )
+      );
+
+      setUploadedVideos(
+        items
+          .filter(
+            (item) => item.type === "video" && item.videoId
+          )
+          .map((item) => ({
+            id: item.videoId,
+            title: item.title,
+            description: item.description,
+          }))
+      );
+
+      setGalleryError("");
+    } catch (error) {
+      if (error.name === "AbortError") return;
+
+      console.error("Gallery fetch error:", error);
+
+      setGalleryError(
+        "New gallery content could not be loaded. Showing saved photos and videos."
+      );
+    }
+  };
+
+  fetchGallery();
+
+  return () => controller.abort();
+}, []);
+
+
+  // Keep the existing local content and append admin-uploaded content.
+  const allGalleryImages = [
+    ...galleryImages,
+    ...uploadedPhotos.map((photo) => ({
+      src: photo.url,
+      title: photo.title,
+    })),
+  ];
+
+  const allVideos = [...videos, ...uploadedVideos];
+
+  const getImageSrc = (image) =>
+    typeof image === "string" ? image : image.src;
+
   // =========================================================
   // ESCAPE KEY
   // =========================================================
@@ -121,7 +200,7 @@ const Gallery = () => {
     setSelectedImage((current) => {
       if (current === null) return null;
 
-      return current === galleryImages.length - 1
+      return current === allGalleryImages.length - 1
         ? 0
         : current + 1;
     });
@@ -132,13 +211,19 @@ const Gallery = () => {
       if (current === null) return null;
 
       return current === 0
-        ? galleryImages.length - 1
+        ? allGalleryImages.length - 1
         : current - 1;
     });
   };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#f7f1e5] text-[#571515]">
+
+      {galleryError && (
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pt-4 text-center text-sm text-[#8B1515]">
+          {galleryError}
+        </div>
+      )}
 
       {/* =====================================================
           DECORATIVE BACKGROUND
@@ -389,7 +474,7 @@ const Gallery = () => {
       "
     >
 
-      {galleryImages.map((image, index) => (
+      {allGalleryImages.map((image, index) => (
 
         <motion.button
           key={index}
@@ -495,8 +580,8 @@ const Gallery = () => {
               "
             >
               <img
-                src={image}
-                alt={`Assamese cultural memory ${index + 1}`}
+                src={getImageSrc(image)}
+                alt={typeof image === "string" ? `Assamese cultural memory ${index + 1}` : image.title}
                 loading="lazy"
                 decoding="async"
                 className="
@@ -780,7 +865,7 @@ const Gallery = () => {
         xl:gap-8
       "
     >
-      {videos.map((video, index) => (
+      {allVideos.map((video, index) => (
 
         <motion.button
           key={`${video.id}-${index}`}
@@ -1155,7 +1240,7 @@ const Gallery = () => {
             >
 
               <img
-                src={galleryImages[selectedImage]}
+                src={getImageSrc(allGalleryImages[selectedImage])}
                 alt={`Gallery ${selectedImage + 1}`}
                 className="
                   max-h-[82vh]
@@ -1184,7 +1269,7 @@ const Gallery = () => {
                 backdrop-blur-md
                 sm:text-sm
               ">
-                {selectedImage + 1} / {galleryImages.length}
+                {selectedImage + 1} / {allGalleryImages.length}
               </div>
 
             </motion.div>

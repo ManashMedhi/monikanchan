@@ -1,10 +1,10 @@
+
 <!doctype html>
-<html lang="en">
+<html lang="as">
   <head>
     <meta charset="UTF-8" />
-
-    <!-- Mobile Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#211b19" />
 
     <!-- SEO Title -->
     <title>
@@ -23,10 +23,7 @@
       content="Monikanchan, Monikanchan Chapar, Chapar Assam, Assamese culture, Assamese cultural website, Naam community, Naam Assam, Assamese music, Assamese traditions, Assamese heritage, Chapar cultural community"
     />
 
-    <!-- Website Author -->
     <meta name="author" content="Monikanchan" />
-
-    <!-- Search Engine Instructions -->
     <meta name="robots" content="index, follow" />
 
     <!-- Canonical URL -->
@@ -35,7 +32,10 @@
       href="https://monikanchan.vercel.app/"
     />
 
-    <!-- Open Graph / Social Sharing -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+
+    <!-- Open Graph -->
     <meta
       property="og:title"
       content="Monikanchan | Assamese Cultural & Naam Community"
@@ -51,15 +51,8 @@
       content="https://monikanchan.vercel.app/"
     />
 
-    <meta
-      property="og:type"
-      content="website"
-    />
-
-    <meta
-      property="og:site_name"
-      content="Monikanchan"
-    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Monikanchan" />
 
     <!-- Geographic Information -->
     <meta name="geo.region" content="IN-AS" />
@@ -82,11 +75,672 @@
       }
     </script>
 
-    <!-- Vite -->
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- Assamese Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================================
+         GLOBAL
+      ========================================= */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      /* =========================================
+         PRELOADER CONTAINER
+      ========================================= */
+
+      #monikanchan-preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+
+        overflow: hidden;
+        background: #211b19;
+
+        opacity: 1;
+        visibility: visible;
+
+        transition:
+          opacity 900ms ease,
+          visibility 900ms ease;
+      }
+
+      #monikanchan-preloader.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* =========================================
+         FULL SCREEN PHOTOGRAPH
+      ========================================= */
+
+      .preloader-photo {
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+        object-position: center 55%;
+
+        z-index: 0;
+
+        pointer-events: none;
+        user-select: none;
+
+        animation: cinematic-zoom 7s ease-out both;
+      }
+
+      /* =========================================
+         IMAGE OVERLAY
+      ========================================= */
+
+      .preloader-overlay {
+        position: absolute;
+        inset: 0;
+
+        z-index: 1;
+
+        background: linear-gradient(
+          180deg,
+          rgba(15, 20, 30, 0.28) 0%,
+          rgba(15, 20, 30, 0.08) 30%,
+          rgba(15, 20, 30, 0.02) 55%,
+          rgba(15, 20, 30, 0.28) 100%
+        );
+
+        pointer-events: none;
+      }
+
+      /* =========================================
+         TOP SKY CONTENT
+      ========================================= */
+
+      .preloader-content {
+        position: absolute;
+
+        z-index: 2;
+
+        top: clamp(28px, 7vh, 75px);
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: min(92%, 650px);
+
+        padding: 15px 20px;
+
+        text-align: center;
+      }
+
+      /* =========================================
+         ASSAMESE TITLE
+      ========================================= */
+
+      .preloader-title {
+        margin: 0;
+
+        color: #fff8e9;
+
+        font-family: "Noto Serif Bengali", Georgia, serif;
+
+        font-size: clamp(35px, 5.5vw, 65px);
+        font-weight: 700;
+
+        line-height: 1.4;
+
+        text-shadow:
+          0 3px 15px rgba(0, 0, 0, 0.55),
+          0 0 30px rgba(255, 255, 255, 0.2);
+
+        animation: fade-up 1s ease-out both;
+      }
+
+      /* =========================================
+         ASSAMESE SUBTITLE
+      ========================================= */
+
+      .preloader-subtitle {
+        margin: 7px 0 0;
+
+        color: #fff0cf;
+
+        font-family: "Noto Serif Bengali", Georgia, serif;
+
+        font-size: clamp(13px, 1.8vw, 18px);
+        font-weight: 600;
+
+        letter-spacing: 1px;
+
+        text-shadow:
+          0 2px 12px rgba(0, 0, 0, 0.5);
+
+        animation: fade-up 1s ease-out 300ms both;
+      }
+
+      /* =========================================
+         TRADITIONAL GOLDEN ORNAMENT
+      ========================================= */
+
+      .preloader-ornament {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        width: min(220px, 65vw);
+
+        margin: 18px auto 15px;
+
+        animation: fade-up 1s ease-out 500ms both;
+      }
+
+      .preloader-ornament::before,
+      .preloader-ornament::after {
+        content: "";
+
+        height: 1px;
+
+        flex: 1;
+
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #e8c77e
+        );
+      }
+
+      .preloader-ornament::after {
+        transform: rotate(180deg);
+      }
+
+      .preloader-ornament span {
+        width: 9px;
+        height: 9px;
+
+        border: 1px solid #f3d58f;
+
+        transform: rotate(45deg);
+
+        box-shadow:
+          0 0 10px rgba(243, 213, 143, 0.7);
+      }
+
+      /* =========================================
+         LOADING TEXT
+      ========================================= */
+
+      .preloader-loading-text {
+        margin: 0 0 12px;
+
+        color: #fff8e9;
+
+        font-family: "Noto Serif Bengali", Georgia, serif;
+
+        font-size: clamp(13px, 1.7vw, 17px);
+
+        letter-spacing: 1px;
+
+        text-shadow:
+          0 2px 10px rgba(0, 0, 0, 0.6);
+
+        animation: fade-up 1s ease-out 700ms both;
+      }
+
+      /* =========================================
+         PROGRESS BAR
+      ========================================= */
+
+      .preloader-progress-wrap {
+        width: min(260px, 72vw);
+
+        margin: auto;
+
+        animation: fade-up 1s ease-out 850ms both;
+      }
+
+      .preloader-bar-track {
+        position: relative;
+
+        width: 100%;
+        height: 3px;
+
+        border-radius: 20px;
+
+        background: rgba(255, 255, 255, 0.35);
+
+        overflow: hidden;
+      }
+
+      .preloader-bar-fill {
+        position: relative;
+
+        width: 0%;
+        height: 100%;
+
+        border-radius: 20px;
+
+        background: linear-gradient(
+          90deg,
+          #ec2121,
+          #ae5d5d,
+          #ec2121
+        );
+
+        box-shadow:
+          0 0 12px rgba(255, 218, 145, 0.8);
+
+        transition: width 100ms linear;
+      }
+
+      /* =========================================
+         LOADING STATUS
+      ========================================= */
+
+      .preloader-status-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-top: 9px;
+      }
+
+      .preloader-loading-label,
+      .preloader-percent {
+        color: #fff3d5;
+
+        font-family: "Noto Serif Bengali", Georgia, serif;
+
+        font-size: 12px;
+
+        text-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.6);
+      }
+
+      .preloader-percent {
+        font-weight: 700;
+
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* =========================================
+         FADE UP ANIMATION
+      ========================================= */
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================================
+         CINEMATIC PHOTO ZOOM
+      ========================================= */
+
+      @keyframes cinematic-zoom {
+        from {
+          transform: scale(1.08);
+        }
+
+        to {
+          transform: scale(1);
+        }
+      }
+
+      /* =========================================
+         TABLET
+      ========================================= */
+
+      @media (max-width: 900px) {
+        .preloader-photo {
+          object-position: center center;
+        }
+
+        .preloader-content {
+          width: 95%;
+        }
+      }
+
+      /* =========================================
+         MOBILE
+      ========================================= */
+
+      @media (max-width: 600px) {
+        .preloader-content {
+          top: 5vh;
+
+          width: 96%;
+
+          padding: 12px;
+        }
+
+        .preloader-title {
+          font-size: clamp(32px, 9vw, 43px);
+        }
+
+        .preloader-subtitle {
+          font-size: 12px;
+        }
+
+        .preloader-ornament {
+          margin: 13px auto 11px;
+        }
+
+        .preloader-loading-text {
+          font-size: 13px;
+
+          margin-bottom: 9px;
+        }
+
+        .preloader-progress-wrap {
+          width: min(220px, 75vw);
+        }
+      }
+
+      /* =========================================
+         LANDSCAPE MOBILE
+      ========================================= */
+
+      @media (max-height: 500px) and (orientation: landscape) {
+        .preloader-content {
+          top: 8px;
+
+          padding: 5px;
+        }
+
+        .preloader-title {
+          font-size: 29px;
+        }
+
+        .preloader-subtitle {
+          font-size: 11px;
+
+          margin-top: 2px;
+        }
+
+        .preloader-ornament {
+          margin: 6px auto;
+        }
+
+        .preloader-loading-text {
+          margin-bottom: 5px;
+        }
+      }
+
+      /* =========================================
+         ACCESSIBILITY
+      ========================================= */
+
+      @media (prefers-reduced-motion: reduce) {
+        .preloader-photo,
+        .preloader-title,
+        .preloader-subtitle,
+        .preloader-ornament,
+        .preloader-loading-text,
+        .preloader-progress-wrap {
+          animation: none !important;
+        }
+
+        #monikanchan-preloader {
+          transition: opacity 300ms ease;
+        }
+      }
+    </style>
   </head>
 
   <body>
+
+    <!-- =====================================
+         MONIKANCHAN ASSAMESE PRELOADER
+    ====================================== -->
+
+    <div
+      id="monikanchan-preloader"
+      role="status"
+      aria-label="মণিকাঞ্চন লোড হৈ আছে"
+    >
+
+      <!-- Full Screen Photograph -->
+      <img
+        class="preloader-photo"
+        id="preloader-main-image"
+        src="/assets/loading.jpg"
+        alt=""
+        fetchpriority="high"
+      />
+
+      <!-- Overlay -->
+      <div class="preloader-overlay"></div>
+
+      <!-- Sky Content -->
+      <div class="preloader-content">
+
+        <h1 class="preloader-title py-10">
+          মণিকাঞ্চন
+        </h1>
+
+        <!-- <p class="preloader-subtitle">
+          অসমৰ ঐতিহ্য আৰু সংস্কৃতিৰ এক উদযাপন
+        </p> -->
+
+        <!-- Golden Ornament -->
+        <!-- <div class="preloader-ornament">
+          <span></span>
+        </div> -->
+
+        <!-- Loading Text -->
+        <p class="preloader-loading-text">
+         Loading...
+        </p>
+
+        <!-- Progress Bar -->
+        <div class="preloader-progress-wrap">
+
+          <div
+            class="preloader-bar-track"
+            id="preloader-progressbar"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div
+              class="preloader-bar-fill"
+              id="preloader-fill"
+            ></div>
+          </div>
+
+          <div class="preloader-status-row">
+
+            <span
+              class="preloader-loading-label"
+              id="preloader-status-text"
+            >
+              স্বাগতম
+            </span>
+
+            <span
+              class="preloader-percent"
+              id="preloader-percent"
+            >
+              ০%
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- React Application -->
     <div id="root"></div>
+
+    <!-- =====================================
+         PRELOADER SCRIPT
+         SEVEN SECOND ANIMATION
+    ====================================== -->
+
+    <script>
+      (function () {
+        const preloader = document.getElementById(
+          "monikanchan-preloader"
+        );
+
+        const image = document.getElementById(
+          "preloader-main-image"
+        );
+
+        const fill = document.getElementById(
+          "preloader-fill"
+        );
+
+        const percent = document.getElementById(
+          "preloader-percent"
+        );
+
+        const progressbar = document.getElementById(
+          "preloader-progressbar"
+        );
+
+        if (!preloader || !image || !fill || !percent) {
+          return;
+        }
+
+        const duration = 7000;
+
+        const digits = "০১২৩৪৫৬৭৮৯";
+
+        let startTime = null;
+        let hidden = false;
+
+        function toAssameseNumber(number) {
+          return String(number).replace(
+            /[0-9]/g,
+            digit => digits[digit]
+          );
+        }
+
+        function hideLoader() {
+          if (hidden) return;
+
+          hidden = true;
+
+          percent.textContent = "১০০%";
+
+          fill.style.width = "100%";
+
+          progressbar?.setAttribute(
+            "aria-valuenow",
+            "100"
+          );
+
+          setTimeout(function () {
+            preloader.classList.add("is-hidden");
+
+            setTimeout(function () {
+              preloader.remove();
+            }, 950);
+
+          }, 300);
+        }
+
+        function animate(now) {
+          if (startTime === null) {
+            startTime = now;
+          }
+
+          const progress = Math.min(
+            (now - startTime) / duration,
+            1
+          );
+
+          const eased = 1 - Math.pow(
+            1 - progress,
+            3
+          );
+
+          const value = Math.round(
+            eased * 100
+          );
+
+          fill.style.width = value + "%";
+
+          percent.textContent =
+            toAssameseNumber(value) + "%";
+
+          progressbar?.setAttribute(
+            "aria-valuenow",
+            String(value)
+          );
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            hideLoader();
+          }
+        }
+
+        function start() {
+          if (image.complete) {
+            requestAnimationFrame(animate);
+            return;
+          }
+
+          image.addEventListener(
+            "load",
+            function () {
+              requestAnimationFrame(animate);
+            },
+            { once: true }
+          );
+
+          image.addEventListener(
+            "error",
+            function () {
+              requestAnimationFrame(animate);
+            },
+            { once: true }
+          );
+        }
+
+        start();
+      })();
+    </script>
+
+    <!-- Vite / React -->
+    <script type="module" src="/src/main.jsx"></script>
+
   </body>
 </html>

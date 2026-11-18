@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
-
+#monikanchan-preloader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 @theme {
     --font-sans: "Geist", sans-serif;
     --font-urbanist: "Urbanist", sans-serif;

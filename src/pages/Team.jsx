@@ -70,7 +70,7 @@ const Team = () => {
     },
     {
       name: "Kaushik Kalita / কৌশিক কলিতা",
-      image: "/assets/team/kaushik.png",
+      image: "/assets/team/kaushik.webp",
     },
     {
       name: "Nipon Das / নিপন দাস",
