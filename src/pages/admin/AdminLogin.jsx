@@ -20,18 +20,19 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        `${API_URL}/api/admin/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // "Origin": window.location.origin,
-          },
-          credentials: "include",
-          body: JSON.stringify({ email, password }),
-        }
-      );
-
+  `${API_URL}/api/admin/auth/login`,
+  {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  }
+);
       const data = await response.json();
 
       if (!response.ok) {

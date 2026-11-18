@@ -40,7 +40,8 @@ const AdminDashboard = () => {
   const fetchGallery = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/api/gallery?page=1&limit=100`
+        `${API_URL}/api/gallery?page=1&limit=100`,
+        { credentials: "include" }
       );
 
       const data = await response.json();
