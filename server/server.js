@@ -66,9 +66,8 @@ const app = express();
 
 app.disable("x-powered-by");
 
-if (process.env.TRUST_PROXY === "1") {
-  app.set("trust proxy", 1);
-}
+// Set trust proxy to true for Render/Vercel
+app.set("trust proxy", 1);
 
 // Security headers
 app.use(helmet());
@@ -79,8 +78,9 @@ app.use(
     origin: corsOrigin,
     credentials: true,
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "X-Requested-With"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     maxAge: 600,
+    exposedHeaders: ["Authorization", "Set-Cookie", "X-API-Key"],
   }),
 );
 
