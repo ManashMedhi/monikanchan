@@ -80,8 +80,7 @@ app.use(
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     maxAge: 600,
-    exposedHeaders: ["Authorization", "Set-Cookie", "X-API-Key"],
-  }),
+  })
 );
 
 // Request parsing

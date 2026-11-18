@@ -96,13 +96,7 @@ export async function login(req, res, next) {
     await admin.save();
 
     // Set cookie with SameSite=None for cross-site communication (Vercel -> Render)
-    res.cookie(COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: true, // Critical for SameSite=None
-      sameSite: "none",
-      path: "/",
-      maxAge: SESSION_MS,
-    });
+    res.cookie(COOKIE_NAME, token, cookieOptions());
 
     return res.status(200).json({
       message: "Login successful.",

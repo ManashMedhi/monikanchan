@@ -104,7 +104,7 @@ const Gallery = () => {
   
 useEffect(() => {
   const apiUrl = (
-    import.meta.env.VITE_API_URL || "http://localhost:5000"
+    import.meta.env.VITE_API_URL
   ).replace(/\/$/, "");
 
   const controller = new AbortController();
