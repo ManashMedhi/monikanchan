@@ -95,7 +95,14 @@ export async function login(req, res, next) {
     admin.lastLoginAt = new Date();
     await admin.save();
 
-    res.cookie(COOKIE_NAME, token, cookieOptions());
+    // Set cookie with SameSite=None for cross-site communication (Vercel -> Render)
+    res.cookie(COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: true, // Critical for SameSite=None
+      sameSite: "none",
+      path: "/",
+      maxAge: SESSION_MS,
+    });
 
     return res.status(200).json({
       message: "Login successful.",
@@ -112,8 +119,13 @@ export function getSession(req, res) {
   });
 }
 
-export function logout(req, res) {
+export function logout(_req, res) {
   const options = cookieOptions();
+
+  // Ensure SameSite is set for cross-site cookies
+  if (typeof options.sameSite === "string") {
+    options.sameSite = "none";
+  }
 
   delete options.maxAge;
 
