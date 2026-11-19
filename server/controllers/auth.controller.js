@@ -19,12 +19,17 @@ function cookieOptions() {
     );
   }
 
+  const secure = process.env.NODE_ENV === "production";
+
+  if (sameSite === "none" && !secure) {
+    throw new Error("SameSite=None requires Secure cookies.");
+  }
+
   return {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure,
     sameSite,
     path: "/",
-    maxAge: SESSION_MS,
   };
 }
 
@@ -37,6 +42,7 @@ function publicAdmin(admin) {
   };
 }
 
+// Admin login
 export async function login(req, res, next) {
   try {
     const email =
@@ -81,10 +87,10 @@ export async function login(req, res, next) {
     }
 
     const token = jwt.sign(
-      { role: "admin" },
+      {},
       process.env.JWT_SECRET,
       {
-        subject: admin.id,
+        subject: admin._id.toString(),
         expiresIn: SESSION_DURATION,
         issuer: "monikanchan-api",
         audience: "monikanchan-admin",
@@ -95,8 +101,10 @@ export async function login(req, res, next) {
     admin.lastLoginAt = new Date();
     await admin.save();
 
-    // Set cookie with SameSite=None for cross-site communication (Vercel -> Render)
-    res.cookie(COOKIE_NAME, token, cookieOptions());
+    res.cookie(COOKIE_NAME, token, {
+      ...cookieOptions(),
+      maxAge: SESSION_MS,
+    });
 
     return res.status(200).json({
       message: "Login successful.",
@@ -107,23 +115,16 @@ export async function login(req, res, next) {
   }
 }
 
+// Get current admin session
 export function getSession(req, res) {
   return res.status(200).json({
     admin: publicAdmin(req.admin),
   });
 }
 
+// Admin logout
 export function logout(_req, res) {
-  const options = cookieOptions();
-
-  // Ensure SameSite is set for cross-site cookies
-  if (typeof options.sameSite === "string") {
-    options.sameSite = "none";
-  }
-
-  delete options.maxAge;
-
-  res.clearCookie(COOKIE_NAME, options);
+  res.clearCookie(COOKIE_NAME, cookieOptions());
 
   return res.status(200).json({
     message: "Logged out successfully.",

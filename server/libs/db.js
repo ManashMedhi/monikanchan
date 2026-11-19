@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 
-   const connectDB = async ()=>{
+const connectDB = async () => {
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
@@ -14,6 +14,6 @@ import mongoose from "mongoose";
   });
 
   console.log("MongoDB connected successfully.");
-}
+};
 
 export default connectDB;

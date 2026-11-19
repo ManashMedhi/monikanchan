@@ -17,7 +17,7 @@ const ALLOWED_IMAGE_TYPES = new Map([
   ["image/webp", "webp"],
 ]);
 
-// Convert a MongoDB gallery item into API response data.
+// Convert MongoDB gallery item into API response data.
 async function serializeItem(item) {
   const result = {
     id: item._id,
@@ -27,7 +27,7 @@ async function serializeItem(item) {
     createdAt: item.createdAt,
   };
 
-  if (item.type === "photo") {
+  if (item.type === "photo" && item.s3Key) {
     result.url = await getObjectUrl(item.s3Key);
   }
 
@@ -119,7 +119,7 @@ export async function getGallery(req, res, next) {
       GalleryItem.countDocuments(filter),
     ]);
 
-    // Generate fresh temporary URLs for photo items.
+    // Generate CloudFront URLs for photo items.
     const serializedItems = await Promise.all(
       items.map((item) => serializeItem(item))
     );
@@ -154,6 +154,13 @@ export async function uploadPhotos(req, res, next) {
 
     for (let index = 0; index < req.files.length; index += 1) {
       const file = req.files[index];
+
+      if (!Buffer.isBuffer(file.buffer)) {
+        throw Object.assign(
+          new Error("Invalid uploaded file."),
+          { statusCode: 400 }
+        );
+      }
 
       // Verify the actual file signature.
       const detected = await fileTypeFromBuffer(file.buffer);

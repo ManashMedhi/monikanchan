@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken";
 import { Admin } from "../models/admin.model.js";
 
@@ -36,8 +35,9 @@ export async function authenticateAdmin(req, res, next) {
     }
 
     req.admin = admin;
-
     next();
+
+    
   } catch {
     return res.status(401).json({
       message: "Session expired. Please log in again.",

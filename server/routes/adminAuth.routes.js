@@ -28,7 +28,7 @@ const loginLimiter = rateLimit({
   },
 });
 
-// POST /api/admin/auth/login
+// Admin login
 router.post(
   "/login",
   requireAllowedOrigin,
@@ -36,18 +36,17 @@ router.post(
   login
 );
 
-// GET /api/admin/auth/me
+// Check current admin session
 router.get(
   "/me",
   authenticateAdmin,
   getSession
 );
 
-// POST /api/admin/auth/logout
+// Admin logout
 router.post(
   "/logout",
   requireAllowedOrigin,
-  authenticateAdmin,
   logout
 );
 
